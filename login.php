@@ -33,24 +33,23 @@
             }
             else
             {              
-                header('Location: index.php?error_account_unactive');               
-                //$_SESSION['e_aktywny'] = "Konto użytkownika zostało zablokowane.";
+                header('Location: index.php?error_account_inactive');               
+                $_SESSION['error_account_inactive'] = "Konto użytkownika zostało zablokowane.";
             }
         }
         else
         {
             //Login w bazie, ale złe hasło
-            header('Location: index.php?error_wrong_password');         
-            //$_SESSION['e_password'] =  "Hasło nie pasuje.";
-        }
-        
+            header('Location: index.php?error_bad_password');         
+            $_SESSION['error_bad_password'] =  "Błędne hasło.";
+        }      
         
     }
     
     else
     {      
         header('Location: index.php?error_wrong_user');
-        //$_SESSION['brak_uzytkownika'] = "Brak użytkownika w bazie.";
+        $_SESSION['error_wrong_user'] = "Brak użytkownika w bazie.";
     }
 }  
   
