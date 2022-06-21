@@ -57,14 +57,11 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Nazwa komputera</th>
-                                            <th>Użytkownik</th>
+                                            <th>Nazwa komputera</th>                                           
                                             <th>Numer seryjny</th>
                                             <th>Marka</th>
                                             <th>Model</th>
-                                            <th>Akcje</th>
-                                            
-                                            
+                                            <th>Akcje</th>                                            
                                         </tr>
                                     </thead>
                                     
@@ -78,7 +75,7 @@
                                                 echo "
                                                     <tr>
                                                         <td>".$rekord['name']."</td>
-                                                        <td>".$rekord['employee']."</td>
+                                                        
                                                         <td>".$rekord['serial_number']."</td>
                                                         <td>".$rekord['brand']."</td>
                                                         <td>".$rekord['model']."</td>

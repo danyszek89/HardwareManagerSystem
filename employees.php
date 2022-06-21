@@ -59,10 +59,10 @@
                                         <tr>
                                             <th>Imie</th>
                                             <th>Nazwisko</th>
+                                            <th>Komputer</th>
                                             <th>Zarejestrowany</th>
                                             <th>Aktywny</th>
                                             <th>Akcje</th>
-
                                         </tr>
                                     </thead>
                                     
@@ -78,6 +78,7 @@
                                                     <tr>
                                                         <td>".$rekord['name']."</td>
                                                         <td>".$rekord['surname']."</td>
+                                                        <td>".$rekord['computer']."</td>
                                                         <td>".$rekord['registered']."</td>
                                                         <td>".$rekord['active']."</td>
                                                         
@@ -86,7 +87,7 @@
                                                             <a class='btn btn-danger btn-sm' href='#'>Delete</a>
                                                         </td>                                                                                  
                                                     </tr>
-                                                    ";
+                                                ";
                                             }                                   
                                         ?>
                                     

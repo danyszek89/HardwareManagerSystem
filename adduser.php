@@ -50,39 +50,58 @@
                                 <!-- <h6 class="m-0 font-weight-bold text-primary">Dostępni użytkownicy</h6> -->
                                 <a class='mt-2 btn btn-warning btn-sm' href='employees.php'>Powrót</a>
                             </div>
-                            <div class="card-body">
-                            <form>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Imię</label>
-                            <input type="text" class="form-control" id="name">
-                           
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Nazwisko</label>
-                            <input type="text" class="form-control" id="surname">
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleInputPassword1" class="form-label">Komputer</label><br>
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected>Wybierz komputer z listy</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Czy aktywować konto?</label>
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Dodaj</button>
-                        </form>
-              
-                    </div>
-            </div>
 
-        </div>
+                            <div class="card-body">
+                                <form action='adduser.inc.php' method='post'>
+                                    <div class="mb-3">
+                                        <label for="exampleInputEmail1" class="form-label">Imię</label>
+                                        <input type="text" name="firstName" id="name" class="form-control" >                                 
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="exampleInputPassword1" class="form-label">Nazwisko</label>
+                                        <input type="text" name="lastName" id="surname" class="form-control" >
+                                    </div>
+
+                                   <!-- <div class="mb-3">
+                                        <label for='exampleInputPassword1' class='form-label'>Komputer</label><br>
+                                            <select name="computerSelect" id="computerSelect" class='form-select' aria-label='Default select example'>
+                                                <option>Wybierz komputer z listy</option>
+                                                
+                                                  <?php              
+                                                        // include('connection.php');     
+                                                        // $sql = "SELECT * FROM computers WHERE employee IS NULL;";
+                                                        // $wynik = mysqli_query($link, $sql);     
+                                                        // while($rekord=mysqli_fetch_assoc($wynik))
+                                                        // {
+                                                            
+                                                        //     echo "     
+                                                            
+                                                        //         <option value=".$rekord['name'].">".$rekord['name']."</option>
+                                                                
+                                                        //     ";
+                                                        // }      
+                                                                                
+                                                    ?>
+                                            </select>
+                                        
+                                    </div>
+                                                    -->
+
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" name="activated" id="activated" class="form-check-input">
+                                        <label class="form-check-label" for="exampleCheck1">Czy aktywować konto?
+                                       
+                                        </label>
+                                    </div>
+                                    
+                                    <button type="submit" name="submit" class="btn btn-primary">Dodaj</button>
+                                </form>
+      
+                            </div>
+                        </div>
+
+                    </div>
                 <!-- /.container-fluid -->
 
             </div>
