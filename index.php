@@ -17,56 +17,52 @@
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                    <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                        <div class="card-body p-5 text-center">
-                            <div class="mb-md-5 mt-md-4 pb-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
 
-                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                    <p class="text-white-50 mb-5">Wprowadź swój login i hasło</p>
+                    <div class="mb-md-5 mt-md-4 pb-5">
 
-                    <form action="login.php" method="POST">
-                        <?php
-                            session_start();
-                      
-                            //Errors handling
-                            if(isset($_SESSION['error_account_inactive']))
-                            {
-                                echo '<div class="error-handling">'.$_SESSION['error_account_inactive'].'</div>';
-                              
-                                unset($_SESSION['error_account_inactive']); 
-                            }
-                            if(isset($_SESSION['error_bad_password']))
-                            {
-                                echo '<div class="error-handling">'.$_SESSION['error_bad_password'].'</div>';
-                              
-                                unset($_SESSION['error_bad_password']); 
-                            }
-                            if(isset($_SESSION['error_wrong_user']))
-                            {
-                                echo '<div class="error-handling">'.$_SESSION['error_wrong_user'].'</div>';
-                              
-                                unset($_SESSION['error_wrong_user']); 
-                            }                          
-                        ?>
+                        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                        <p class="text-white-50 mb-5">Wprowadź swój login i hasło</p>
 
-                        <div class="form-outline form-white mb-4">
-                            <input type="text" name="login" class="form-control form-control-lg" required/>
-                            <label class="form-label" for="login">Login</label>
-                        </div>
+                        <form action="login.php" method="POST">
+                            <?php
+                                session_start();
+                        
+                                //Errors handling
+                                if(isset($_SESSION['error_account_inactive']))
+                                {
+                                    echo '<div class="error-handling">'.$_SESSION['error_account_inactive'].'</div>';
+                                
+                                    unset($_SESSION['error_account_inactive']); 
+                                }
+                                if(isset($_SESSION['error_bad_password']))
+                                {
+                                    echo '<div class="error-handling">'.$_SESSION['error_bad_password'].'</div>';
+                                
+                                    unset($_SESSION['error_bad_password']); 
+                                }
+                                if(isset($_SESSION['error_wrong_user']))
+                                {
+                                    echo '<div class="error-handling">'.$_SESSION['error_wrong_user'].'</div>';
+                                
+                                    unset($_SESSION['error_wrong_user']); 
+                                }                          
+                            ?>
 
-                        <div class="form-outline form-white mb-4">
-                            <input type="password" name="password" class="form-control form-control-lg" required/>
-                            <label class="form-label" for="password">Hasło</label>
-                        </div>
-                   
+                            <div class="form-outline form-white mb-4">
+                                <input type="text" name="login" class="form-control form-control-lg" required/>
+                                <label class="form-label" for="login">Login</label>
+                            </div>
 
-                        <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p>
-
-                        <button class="btn btn-outline-light btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
-                    </form>
-
+                            <div class="form-outline form-white mb-4">
+                                <input type="password" name="password" class="form-control form-control-lg" required/>
+                                <label class="form-label" for="password">Hasło</label>
+                            </div>
                     
-
+                            <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p>
+                            <button class="btn btn-outline-light btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
+                        </form>            
                     </div>
 
                     <div>
