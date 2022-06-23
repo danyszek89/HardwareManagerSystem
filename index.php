@@ -22,9 +22,13 @@
 
                     <div class="mb-md-5 mt-md-4 pb-5">
 
-                        <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                        <p class="text-white-50 mb-5">Wprowadź swój login i hasło</p>
+                        <img src="img/iconSmall.png" alt="">
 
+                        <h2 class="fw-bold mb-2">Hardware manager system</h2>
+                        <hr>
+                        <p class="text-white-50 mb-5">Zarządzanie zasobami staje się łatwiejsze!</p>
+                        <br>
+                                               
                         <form action="login.php" method="POST">
                             <?php
                                 session_start();
@@ -32,42 +36,45 @@
                                 //Errors handling
                                 if(isset($_SESSION['error_account_inactive']))
                                 {
-                                    echo '<div class="error-handling">'.$_SESSION['error_account_inactive'].'</div>';
-                                
+                                    //echo '<div class="error-handling">'.$_SESSION['error_account_inactive'].'</div>';
+                                    echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_account_inactive'].'</div>'; 
                                     unset($_SESSION['error_account_inactive']); 
                                 }
                                 if(isset($_SESSION['error_bad_password']))
                                 {
-                                    echo '<div class="error-handling">'.$_SESSION['error_bad_password'].'</div>';
-                                
+                                    //echo '<div class="error-handling">'.$_SESSION['error_bad_password'].'</div>';
+                                    echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_bad_password'].'</div>'; 
                                     unset($_SESSION['error_bad_password']); 
                                 }
                                 if(isset($_SESSION['error_wrong_user']))
                                 {
-                                    echo '<div class="error-handling">'.$_SESSION['error_wrong_user'].'</div>';
-                                
-                                    unset($_SESSION['error_wrong_user']); 
-                                }                          
+                                   //echo '<div class="error-handling">'.$_SESSION['error_wrong_user'].'</div>';
+                                   echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_wrong_user'].'</div>';                                                     
+                                   unset($_SESSION['error_wrong_user']); 
+                                }    
+                                     
                             ?>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="text" name="login" class="form-control form-control-lg" required/>
-                                <label class="form-label" for="login">Login</label>
+                                <input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required/>
+                                <!-- <label class="form-label" for="login">Login</label> -->
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="password" name="password" class="form-control form-control-lg" required/>
-                                <label class="form-label" for="password">Hasło</label>
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Hasło" required/>
+                                <!-- <label class="form-label" for="password">Hasło</label> -->
                             </div>
                     
                             <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p>
-                            <button class="btn btn-outline-light btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
+                            <button class="btn loginButton btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
                         </form>            
                     </div>
 
+                    <!-- <div>
+                        <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+                    </div> -->
                     <div>
-                        <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a>
-                    </p>
+                        <p class="text-white-50 mb-0">Wersja 1.0</p>
                     </div>
 
                 </div>

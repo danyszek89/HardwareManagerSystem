@@ -1,3 +1,5 @@
+<?php
+session_start();?>
 <!DOCTYPE html>
 <html lang="pl">
 
@@ -52,15 +54,35 @@
                             </div>
 
                             <div class="card-body">
-                                <form action='adduser.inc.php' method='post'>
+                                <form action='adduser.inc.php' method='POST'>
+                                    <?php                                                                 
+                                        //Errors handling
+                                        if(isset($_SESSION['error_firstName']))
+                                        {                                            
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_firstName'].'</div>'; 
+                                            unset($_SESSION['error_firstName']); 
+                                        }
+                                        if(isset($_SESSION['error_lastName']))
+                                        {                                          
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_lastName'].'</div>'; 
+                                            unset($_SESSION['error_lastName']); 
+                                        }                                                          
+                                    ?>
+
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Imię</label>
-                                        <input type="text" name="firstName" id="name" class="form-control" >                                 
+                                        <input type="text" name="firstName" id="name" class="form-control" required>      
+                                        <?php
+                                            // if(!isset($_SESSION['error_firstName']))
+                                            // { 
+                                            //  echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_firstName'].'</div>';
+                                            // }
+                                             ?>                           
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Nazwisko</label>
-                                        <input type="text" name="lastName" id="surname" class="form-control" >
+                                        <input type="text" name="lastName" id="surname" class="form-control" required>
                                     </div>
 
                                    <!-- <div class="mb-3">
@@ -68,21 +90,7 @@
                                             <select name="computerSelect" id="computerSelect" class='form-select' aria-label='Default select example'>
                                                 <option>Wybierz komputer z listy</option>
                                                 
-                                                  <?php              
-                                                        // include('connection.php');     
-                                                        // $sql = "SELECT * FROM computers WHERE employee IS NULL;";
-                                                        // $wynik = mysqli_query($link, $sql);     
-                                                        // while($rekord=mysqli_fetch_assoc($wynik))
-                                                        // {
-                                                            
-                                                        //     echo "     
-                                                            
-                                                        //         <option value=".$rekord['name'].">".$rekord['name']."</option>
-                                                                
-                                                        //     ";
-                                                        // }      
-                                                                                
-                                                    ?>
+                                               
                                             </select>
                                         
                                     </div>

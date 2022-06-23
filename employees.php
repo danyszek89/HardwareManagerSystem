@@ -57,6 +57,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>
                                             <th>Imie</th>
                                             <th>Nazwisko</th>
                                             <th>Komputer</th>
@@ -76,6 +77,7 @@
                                             {
                                                 echo "
                                                     <tr>
+                                                        <td>".$rekord['id']."</td>
                                                         <td>".$rekord['name']."</td>
                                                         <td>".$rekord['surname']."</td>
                                                         <td>".$rekord['computer']."</td>
@@ -83,14 +85,17 @@
                                                         <td>".$rekord['active']."</td>
                                                         
                                                         <td>
-                                                            <a class='btn btn-primary btn-sm' href='#'>Update</a>
-                                                            <a class='btn btn-danger btn-sm' href='#'>Delete</a>
+                                                            
+                                                            <button type='button' class='btn btn-success editbtn'> EDIT </button>
+                                                            <button type='button' class='btn btn-danger deletebtn'> DELETE </button>
+
                                                         </td>                                                                                  
                                                     </tr>
                                                 ";
                                             }                                   
                                         ?>
-                                    
+                                        <!-- <a class='btn btn-primary btn-sm' href='#'>Update</a> -->
+                                    <!-- <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#deleteUserModal'>Delete</a> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -118,22 +123,126 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  <!-- Modal -->
+  <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Wylogowanie</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Student Data </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">Czy na pewno chcesz się wylogować?</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Anuluj</button>
-                    <a class="btn btn-primary" href="index.php">Wyloguj</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Edycja danych użytkownika </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+
+                <!-- POPUP EDYCJI DANYCH USERA -->
+                <form action="updateuser.inc.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+
+                        <div class="form-group">
+                            <label> Imię </label>
+                            <input type="text" name="editName" id="editName" class="form-control"
+                                placeholder="Wprowadź imię" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Nazwisko </label>
+                            <input type="text" name="editSurname" id="editSurname" class="form-control"
+                                placeholder="Wprowadź nazwisko" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Aktywny</label>
+                            <input type="text" name="editActive" id="editActive" class="form-control"
+                                placeholder="Wprowadź 0 lub 1" required>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Aktualizuj</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Usuwanie użytkownika </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="deleteuser.inc.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <h4> Czy na pewno chcesz usunąć wybranego użytkownika?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
+                        <button type="submit" name="deletedata" class="btn btn-primary"> Usuń </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Dane użytkownika </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="deletecode.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="text" name="view_id" id="view_id">
+
+                        <!-- <p id="editName"> </p> -->
+                        <h4 id="editName"> <?php echo ''; ?> </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
+                        <!-- <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button> -->
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -155,7 +264,51 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
 
-</body>
+    <script>
+        $(document).ready(function () {
 
+            $('.deletebtn').on('click', function () {
+
+                $('#deletemodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#delete_id').val(data[0]);
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#update_id').val(data[0]);
+                $('#editName').val(data[1]);
+                $('#editSurname').val(data[2]);
+                $('#editActive').val(data[3]);
+                
+            });
+        });
+    </script>
+   
+</body>
 
 </html>
