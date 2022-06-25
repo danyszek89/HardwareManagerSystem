@@ -86,8 +86,10 @@
                                                         
                                                         <td>
                                                             
-                                                            <button type='button' class='btn btn-success editbtn'> EDIT </button>
-                                                            <button type='button' class='btn btn-danger deletebtn'> DELETE </button>
+                                                            <button type='button' class='btn btn-primary btn-sm editbtn'> Edytuj </button>
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>
+
+                                                            
 
                                                         </td>                                                                                  
                                                     </tr>
@@ -122,6 +124,26 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Wylogowanie</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Czy na pewno chcesz się wylogować?</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Anuluj</button>
+                        <a class="btn btn-primary" href="index.php">Wyloguj</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
   <!-- Modal -->
   <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -172,7 +194,7 @@
                         <div class="form-group">
                             <label> Aktywny</label>
                             <input type="text" name="editActive" id="editActive" class="form-control"
-                                placeholder="Wprowadź 0 lub 1" required>
+                                placeholder="" required>
                         </div>
                         
                     </div>
@@ -204,7 +226,7 @@
 
                         <input type="hidden" name="delete_id" id="delete_id">
 
-                        <h4> Czy na pewno chcesz usunąć wybranego użytkownika?</h4>
+                        <h5> Czy na pewno chcesz usunąć wybranego użytkownika?</h5>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
@@ -303,7 +325,7 @@
                 $('#update_id').val(data[0]);
                 $('#editName').val(data[1]);
                 $('#editSurname').val(data[2]);
-                $('#editActive').val(data[3]);
+                $('#editActive').val(data[5]);
                 
             });
         });

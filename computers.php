@@ -49,7 +49,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Dostępne komputery</h6>
-                            <a class='mt-2 btn btn-success btn-sm' href='#'>Dodaj komputer</a>
+                            <a class='mt-2 btn btn-success btn-sm' href='addcomputer.php'>Dodaj komputer</a>
                         </div>
                      
                         <div class="card-body">
@@ -57,6 +57,7 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
+                                            <th>ID</th>                                           
                                             <th>Nazwa komputera</th>                                           
                                             <th>Numer seryjny</th>
                                             <th>Marka</th>
@@ -74,15 +75,16 @@
                                             {
                                                 echo "
                                                     <tr>
-                                                        <td>".$rekord['name']."</td>
-                                                        
+                                                        <td>".$rekord['id']."</td>
+                                                        <td>".$rekord['name']."</td>                         
                                                         <td>".$rekord['serial_number']."</td>
                                                         <td>".$rekord['brand']."</td>
                                                         <td>".$rekord['model']."</td>
                                                         
                                                         <td>
-                                                            <a class='btn btn-primary btn-sm' href='#'>Update</a>
-                                                            <a class='btn btn-danger btn-sm' href='#'>Delete</a>
+                                                            <button type='button' class='btn btn-primary btn-sm editbtn'> Edytuj </button>
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>
+                                                            
                                                         </td>                                                                                  
                                                     </tr>
                                                     ";
@@ -136,6 +138,136 @@
         </div>
     </div>
 
+    <!-- Modal -->
+  <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Student Data </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Edycja danych komputera </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <!-- POPUP EDYCJI DANYCH KOMPUTERA -->
+                <form action="updatecomputer.inc.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="update_id" id="update_id">
+
+                        <div class="form-group">
+                            <label> Nazwa komputera </label>
+                            <input type="text" name="editName" id="editName" class="form-control"
+                                placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Numer seryjny </label>
+                            <input type="text" name="editSerialNumber" id="editSerialNumber" class="form-control"
+                                placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Marka</label>
+                            <input type="text" name="editBrand" id="editBrand" class="form-control"
+                                placeholder="" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label> Model</label>
+                            <input type="text" name="editModel" id="editModel" class="form-control"
+                                placeholder="">
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
+                        <button type="submit" name="updatedata" class="btn btn-primary">Aktualizuj</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- DELETE POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Usuwanie komputera </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="deletecomputer.inc.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="hidden" name="delete_id" id="delete_id">
+
+                        <h5> Czy na pewno chcesz wybrane urządzenie?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
+                        <button type="submit" name="deletedata" class="btn btn-primary"> Usuń </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW POP UP FORM (Bootstrap MODAL) -->
+    <div class="modal fade" id="viewmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> Dane urządzenia </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form action="deletecode.php" method="POST">
+
+                    <div class="modal-body">
+
+                        <input type="text" name="view_id" id="view_id">
+
+                        <!-- <p id="editName"> </p> -->
+                        <h4 id="editName"> <?php echo ''; ?> </h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
+                        <!-- <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button> -->
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -152,6 +284,52 @@
 
     <!-- Page level custom scripts -->
     <script src="js/demo/datatables-demo.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.deletebtn').on('click', function () {
+
+                $('#deletemodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#delete_id').val(data[0]);
+
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.editbtn').on('click', function () {
+
+                $('#editmodal').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function () {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#update_id').val(data[0]);
+                $('#editName').val(data[1]);
+                $('#editSerialNumber').val(data[2]);
+                $('#editBrand').val(data[3]);
+                $('#editModel').val(data[4]);
+                
+            });
+        });
+    </script>
 
 </body>
 
