@@ -26,7 +26,7 @@
     }       
     else
     {
-        $sql = "INSERT INTO computers (`id`, `name`, `serial_number`, `brand`, `model`) VALUES (NULL, '$name', '$serialNumber', '$brand', '$model')";
+        $sql = "INSERT INTO computers (`id`, `computer_name`, `serial_number`, `brand`, `model`) VALUES (NULL, '$name', '$serialNumber', '$brand', '$model')";
         $wynik = mysqli_query($link, $sql);  
 
         header("Location:computers.php");

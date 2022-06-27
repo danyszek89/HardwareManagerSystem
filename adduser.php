@@ -85,16 +85,24 @@ session_start();?>
                                         <input type="text" name="lastName" id="surname" class="form-control" required>
                                     </div>
 
-                                   <!-- <div class="mb-3">
-                                        <label for='exampleInputPassword1' class='form-label'>Komputer</label><br>
+                                    <div class="mb-3">
+                                    <label> Komputer </label>     
                                             <select name="computerSelect" id="computerSelect" class='form-select' aria-label='Default select example'>
                                                 <option>Wybierz komputer z listy</option>
-                                                
-                                               
-                                            </select>
-                                        
+                                                    <?php              
+                                                        include('connection.php');     
+                                                        $sql = "SELECT * FROM computers WHERE owner_id IS NULL";
+                                                        $wynik = mysqli_query($link, $sql);     
+                                                        while($rekord=mysqli_fetch_assoc($wynik))
+                                                        {
+                                                            echo "                                                                                        
+                                                                    <option>".$rekord['computer_name']."</option>                    
+                                                                ";
+                                                        }                                   
+                                                    ?>                                           
+                                            </select>                                     
                                     </div>
-                                                    -->
+                                                    
 
                                     <div class="mb-3 form-check">
                                         <input type="checkbox" name="activated" id="activated" class="form-check-input">

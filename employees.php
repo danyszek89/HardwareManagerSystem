@@ -60,7 +60,7 @@
                                             <th>ID</th>
                                             <th>Imie</th>
                                             <th>Nazwisko</th>
-                                            <th>Komputer</th>
+                                            
                                             <th>Zarejestrowany</th>
                                             <th>Aktywny</th>
                                             <th>Akcje</th>
@@ -71,6 +71,8 @@
 
                                         <?php              
                                             include('connection.php');     
+                                            //$sql = "SELECT employees.id, employees.name, employees.surname, computers.computer_name, employees.registered, employees.active
+                                            //FROM employees INNER JOIN computers ON computers.owner_id = employees.id";
                                             $sql = "SELECT * FROM employees";
                                             $wynik = mysqli_query($link, $sql);     
                                             while($rekord=mysqli_fetch_assoc($wynik))
@@ -80,7 +82,7 @@
                                                         <td>".$rekord['id']."</td>
                                                         <td>".$rekord['name']."</td>
                                                         <td>".$rekord['surname']."</td>
-                                                        <td>".$rekord['computer']."</td>
+                                                        
                                                         <td>".$rekord['registered']."</td>
                                                         <td>".$rekord['active']."</td>
                                                         

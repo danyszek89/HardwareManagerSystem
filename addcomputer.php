@@ -108,7 +108,7 @@ session_start();?>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Model</label>
-                                        <input type="text" name="model" id="model" class="form-control" required>
+                                        <input type="text" name="model" id="model" class="form-control">
                                     </div>
 
                                  

@@ -59,6 +59,7 @@
                                         <tr>
                                             <th>ID</th>                                           
                                             <th>Nazwa komputera</th>                                           
+                                            <th>Użytkownik</th>                                           
                                             <th>Numer seryjny</th>
                                             <th>Marka</th>
                                             <th>Model</th>
@@ -69,6 +70,12 @@
                                     <tbody>
                                     <?php              
                                             include('connection.php');     
+
+                                            
+
+                                            //$sql = "SELECT computers.id, computers.computer_name, employees.name, computers.serial_number, computers.brand, computers.model
+                                            //FROM computers INNER JOIN employees ON employees.id = computers.owner_id";
+
                                             $sql = "SELECT * FROM computers";
                                             $wynik = mysqli_query($link, $sql);     
                                             while($rekord=mysqli_fetch_assoc($wynik))
@@ -76,7 +83,8 @@
                                                 echo "
                                                     <tr>
                                                         <td>".$rekord['id']."</td>
-                                                        <td>".$rekord['name']."</td>                         
+                                                        <td>".$rekord['computer_name']."</td>                         
+                                                        <td>".$rekord['owner_id']."</td>                         
                                                         <td>".$rekord['serial_number']."</td>
                                                         <td>".$rekord['brand']."</td>
                                                         <td>".$rekord['model']."</td>
@@ -169,7 +177,6 @@
                 <form action="updatecomputer.inc.php" method="POST">
 
                     <div class="modal-body">
-
                         <input type="hidden" name="update_id" id="update_id">
 
                         <div class="form-group">
@@ -179,11 +186,30 @@
                         </div>
 
                         <div class="form-group">
+                            <label> Uzytkownik </label>                          
+                            <select name="editUser" id="editUser" class='form-select' aria-label='Default select example'>
+                                <option>Brak</option>                                                         
+                                        <?php              
+                                            include('connection.php');     
+                                            $sql = "SELECT * FROM employees";
+                                            $wynik = mysqli_query($link, $sql);     
+                                            while($rekord=mysqli_fetch_assoc($wynik))
+                                            {
+                                                echo "                                                                
+                                                        <option>".$rekord['id']."</option>                                                                             
+                                                    ";
+                                            }                                   
+                                        ?>                                   
+                            </select>                       
+                        </div>
+                        
+
+                        <div class="form-group">
                             <label> Numer seryjny </label>
                             <input type="text" name="editSerialNumber" id="editSerialNumber" class="form-control"
                                 placeholder="" required>
                         </div>
-
+                        
                         <div class="form-group">
                             <label> Marka</label>
                             <input type="text" name="editBrand" id="editBrand" class="form-control"
@@ -323,9 +349,11 @@
 
                 $('#update_id').val(data[0]);
                 $('#editName').val(data[1]);
-                $('#editSerialNumber').val(data[2]);
-                $('#editBrand').val(data[3]);
-                $('#editModel').val(data[4]);
+                $('#editUser').val(data[2]);
+
+                $('#editSerialNumber').val(data[3]);
+                $('#editBrand').val(data[4]);
+                $('#editModel').val(data[5]);
                 
             });
         });
