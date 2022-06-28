@@ -6,7 +6,7 @@
   <!--   <div class="sidebar-brand-icon rotate-n-15">
         <i class="fas fa-laugh-wink"></i>
     </div> -->
-    <div class="sidebar-brand-text mx-3">HMS Dashboard </div>
+    <div class="sidebar-brand-text mx-3">HMS Dashboard</div>
 </a>
 
 <!-- Divider -->
@@ -44,7 +44,7 @@
 <hr class="sidebar-divider">
 
 <!-- Nav Item - Pages Collapse Menu -->
-<li class="nav-item">
+<!-- <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
         aria-expanded="true" aria-controls="collapsePages">
         <i class="fa fa-cog" aria-hidden="true"></i>
@@ -62,10 +62,10 @@
             <a class="collapse-item" href="blank.html">Blank Page</a>
         </div>
     </div>
-</li>        
+</li>         -->
 
 <!-- Divider -->
-<hr class="sidebar-divider d-none d-md-block">
+<!-- <hr class="sidebar-divider d-none d-md-block"> -->
 
 </ul>
 <!-- End of Sidebar -->

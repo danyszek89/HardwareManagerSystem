@@ -14,8 +14,7 @@
     $rowcount = mysqli_num_rows($result);
   
     if($rowcount == 1)
-    {          
-        //header('Location: https://www.allegro.pl');
+    {                 
         $row = mysqli_fetch_assoc($result);
         if (password_verify($password, $row['password']))  
         {    
@@ -24,6 +23,8 @@
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['login'] = $row['login'];
                 $_SESSION['password'] = $row['password'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['surname'] = $row['surname'];
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['registered'] = $row['registered'];
                 $_SESSION['type'] = $row['type'];
@@ -42,15 +43,12 @@
             //Login w bazie, ale złe hasło
             header('Location: index.php?error_bad_password');         
             $_SESSION['error_bad_password'] =  "Błędne hasło.";
-        }      
-        
-    }
-    
+        }             
+    }   
     else
     {      
         header('Location: index.php?error_wrong_user');
         $_SESSION['error_wrong_user'] = "Brak użytkownika w bazie.";
     }
 }  
-  
 ?>

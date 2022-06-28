@@ -1,6 +1,6 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HMS-Computers</title>
+    <title>Komputery</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -16,6 +16,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -23,9 +24,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?php 
-            include_once('sidebar.php');
-        ?>
+        <?php include_once('sidebar.php');?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -33,10 +32,7 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php 
-                include_once('topbar.php');
-            ?>
-
+            <?php include_once('topbar.php');?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -49,7 +45,18 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Dostępne komputery</h6>
-                            <a class='mt-2 btn btn-success btn-sm' href='addcomputer.php'>Dodaj komputer</a>
+                            <?php
+                                if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator' || $_SESSION['type'] == 'moderator'))
+                                {
+                                    echo "<a class='mt-2 btn btn-success btn-sm' href='addcomputer.php'>Dodaj komputer</a>";
+                                }
+                                else
+                                {
+                                    echo "<a class='mt-2 btn btn-success btn-sm  disabled' href='#'>Dodaj komputer</a>";
+                                }
+                            ?>
+                           
+                            
                         </div>
                      
                         <div class="card-body">
@@ -68,14 +75,10 @@
                                     </thead>
                                     
                                     <tbody>
-                                    <?php              
-                                            include('connection.php');     
-
-                                            
-
+                                        <?php              
+                                            include('connection.php');                               
                                             //$sql = "SELECT computers.id, computers.computer_name, employees.name, computers.serial_number, computers.brand, computers.model
                                             //FROM computers INNER JOIN employees ON employees.id = computers.owner_id";
-
                                             $sql = "SELECT * FROM computers";
                                             $wynik = mysqli_query($link, $sql);     
                                             while($rekord=mysqli_fetch_assoc($wynik))
@@ -87,33 +90,40 @@
                                                         <td>".$rekord['owner_id']."</td>                         
                                                         <td>".$rekord['serial_number']."</td>
                                                         <td>".$rekord['brand']."</td>
-                                                        <td>".$rekord['model']."</td>
-                                                        
-                                                        <td>
+                                                        <td>".$rekord['model']."</td>                          
+                                                    ";   
+                                                        if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator' || $_SESSION['type'] == 'moderator'))
+                                                        {
+                                                            echo "
+                                                            <td>
                                                             <button type='button' class='btn btn-primary btn-sm editbtn'> Edytuj </button>
-                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>   
+                                                            </td>";
+                                                        }
+                                                        else{
+                                                            echo "
+                                                            <td>
+                                                            <button type='button' class='disabled btn btn-primary btn-sm '> Edytuj </button>
+                                                            <button type='button' class='disabled btn btn-danger btn-sm '> Usuń </button>   
+                                                            </td>";
+                                                        }
                                                             
-                                                        </td>                                                                                  
-                                                    </tr>
-                                                    ";
+                                                echo "</tr>
+                                                ";                                             
                                             }                                   
-                                        ?>
-                                     
+                                        ?>                                   
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
 
-            <?php 
-                include_once('footer.php');
-            ?>
+            <?php include_once('footer.php');?>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -147,8 +157,7 @@
     </div>
 
     <!-- Modal -->
-  <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="studentaddmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -189,21 +198,20 @@
                             <label> Uzytkownik </label>                          
                             <select name="editUser" id="editUser" class='form-select' aria-label='Default select example'>
                                 <option>Brak</option>                                                         
-                                        <?php              
-                                            include('connection.php');     
-                                            $sql = "SELECT * FROM employees";
-                                            $wynik = mysqli_query($link, $sql);     
-                                            while($rekord=mysqli_fetch_assoc($wynik))
-                                            {
-                                                echo "                                                                
-                                                        <option>".$rekord['id']."</option>                                                                             
-                                                    ";
-                                            }                                   
-                                        ?>                                   
+                                    <?php              
+                                        include('connection.php');     
+                                        $sql = "SELECT * FROM employees";
+                                        $wynik = mysqli_query($link, $sql);     
+                                        while($rekord=mysqli_fetch_assoc($wynik))
+                                        {
+                                            echo "                                                                
+                                                    <option>".$rekord['id']."</option>                                                                             
+                                                ";
+                                        }                                   
+                                    ?>                                   
                             </select>                       
                         </div>
                         
-
                         <div class="form-group">
                             <label> Numer seryjny </label>
                             <input type="text" name="editSerialNumber" id="editSerialNumber" class="form-control"
@@ -212,23 +220,21 @@
                         
                         <div class="form-group">
                             <label> Marka</label>
-                            <input type="text" name="editBrand" id="editBrand" class="form-control"
-                                placeholder="" required>
+                            <input type="text" name="editBrand" id="editBrand" class="form-control" placeholder="" required>
                         </div>
 
                         <div class="form-group">
                             <label> Model</label>
-                            <input type="text" name="editModel" id="editModel" class="form-control"
-                                placeholder="">
+                            <input type="text" name="editModel" id="editModel" class="form-control" placeholder="">
                         </div>
                         
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
                         <button type="submit" name="updatedata" class="btn btn-primary">Aktualizuj</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -246,11 +252,8 @@
                 </div>
 
                 <form action="deletecomputer.inc.php" method="POST">
-
                     <div class="modal-body">
-
                         <input type="hidden" name="delete_id" id="delete_id">
-
                         <h5> Czy na pewno chcesz wybrane urządzenie?</h5>
                     </div>
                     <div class="modal-footer">
@@ -258,7 +261,6 @@
                         <button type="submit" name="deletedata" class="btn btn-primary"> Usuń </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -276,17 +278,12 @@
                 </div>
 
                 <form action="deletecode.php" method="POST">
-
                     <div class="modal-body">
-
-                        <input type="text" name="view_id" id="view_id">
-
-                        <!-- <p id="editName"> </p> -->
+                        <input type="text" name="view_id" id="view_id">                     
                         <h4 id="editName"> <?php echo ''; ?> </h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
-                        <!-- <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button> -->
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>                        
                     </div>
                 </form>
 
@@ -350,7 +347,6 @@
                 $('#update_id').val(data[0]);
                 $('#editName').val(data[1]);
                 $('#editUser').val(data[2]);
-
                 $('#editSerialNumber').val(data[3]);
                 $('#editBrand').val(data[4]);
                 $('#editModel').val(data[5]);
@@ -358,8 +354,5 @@
             });
         });
     </script>
-
 </body>
-
-
 </html>

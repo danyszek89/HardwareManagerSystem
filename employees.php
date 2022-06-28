@@ -1,6 +1,6 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HMS-Users</title>
+    <title>Użytkownicy</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,9 +23,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?php 
-            include_once('sidebar.php');
-        ?>
+        <?php include_once('sidebar.php');?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -33,10 +31,7 @@
             <!-- Main Content -->
             <div id="content">
 
-            <?php 
-                include_once('topbar.php');
-            ?>
-
+            <?php include_once('topbar.php');?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
@@ -49,7 +44,17 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Dostępni użytkownicy</h6>
-                            <a class='mt-2 btn btn-success btn-sm' href='adduser.php'>Dodaj użytkownika</a>
+                            <?php
+                                if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator'))
+                                {
+                                    echo "<a class='mt-2 btn btn-success btn-sm' href='adduser.php'>Dodaj użytkownika</a>";
+                                }
+                                else
+                                {
+                                    echo "<a class='mt-2 btn btn-success btn-sm disabled' href='#'>Dodaj użytkownika</a>";
+                                }
+                            ?>
+                            
                         </div>
                         <div class="card-body">
                        
@@ -59,16 +64,13 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Imie</th>
-                                            <th>Nazwisko</th>
-                                            
+                                            <th>Nazwisko</th>                                          
                                             <th>Zarejestrowany</th>
                                             <th>Aktywny</th>
                                             <th>Akcje</th>
                                         </tr>
-                                    </thead>
-                                    
+                                    </thead>                                  
                                     <tbody>
-
                                         <?php              
                                             include('connection.php');     
                                             //$sql = "SELECT employees.id, employees.name, employees.surname, computers.computer_name, employees.registered, employees.active
@@ -81,25 +83,29 @@
                                                     <tr>
                                                         <td>".$rekord['id']."</td>
                                                         <td>".$rekord['name']."</td>
-                                                        <td>".$rekord['surname']."</td>
-                                                        
+                                                        <td>".$rekord['surname']."</td>                                                        
                                                         <td>".$rekord['registered']."</td>
-                                                        <td>".$rekord['active']."</td>
-                                                        
-                                                        <td>
-                                                            
+                                                        <td>".$rekord['active']."</td>     
+                                                    ";                                                   
+                                                        if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator'))
+                                                        {
+                                                            echo "
+                                                            <td>
                                                             <button type='button' class='btn btn-primary btn-sm editbtn'> Edytuj </button>
-                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>
-
-                                                            
-
-                                                        </td>                                                                                  
-                                                    </tr>
-                                                ";
+                                                            <button type='button' class='btn btn-danger btn-sm deletebtn'> Usuń </button>   
+                                                            </td>";
+                                                        }
+                                                        else{
+                                                            echo "
+                                                            <td>
+                                                            <button type='button' class='disabled btn btn-primary btn-sm '> Edytuj </button>
+                                                            <button type='button' class='disabled btn btn-danger btn-sm '> Usuń </button>   
+                                                            </td>";
+                                                        }                                                                         
+                                                echo "</tr>
+                                                "; 
                                             }                                   
-                                        ?>
-                                        <!-- <a class='btn btn-primary btn-sm' href='#'>Update</a> -->
-                                    <!-- <a class='btn btn-danger btn-sm' href='#' data-toggle='modal' data-target='#deleteUserModal'>Delete</a> -->
+                                        ?>                                      
                                     </tbody>
                                 </table>
                             </div>
@@ -112,9 +118,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <?php 
-                include_once('footer.php');
-            ?>
+            <?php include_once('footer.php');?>
 
         </div>
         <!-- End of Content Wrapper -->
@@ -176,9 +180,7 @@
 
                 <!-- POPUP EDYCJI DANYCH USERA -->
                 <form action="updateuser.inc.php" method="POST">
-
                     <div class="modal-body">
-
                         <input type="hidden" name="update_id" id="update_id">
 
                         <div class="form-group">
@@ -196,7 +198,7 @@
                         <div class="form-group">
                             <label> Aktywny</label>
                             <input type="text" name="editActive" id="editActive" class="form-control"
-                                placeholder="" required>
+                                 required>
                         </div>
                         
                     </div>
@@ -205,7 +207,6 @@
                         <button type="submit" name="updatedata" class="btn btn-primary">Aktualizuj</button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -223,11 +224,8 @@
                 </div>
 
                 <form action="deleteuser.inc.php" method="POST">
-
                     <div class="modal-body">
-
                         <input type="hidden" name="delete_id" id="delete_id">
-
                         <h5> Czy na pewno chcesz usunąć wybranego użytkownika?</h5>
                     </div>
                     <div class="modal-footer">
@@ -235,7 +233,6 @@
                         <button type="submit" name="deletedata" class="btn btn-primary"> Usuń </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -253,20 +250,14 @@
                 </div>
 
                 <form action="deletecode.php" method="POST">
-
                     <div class="modal-body">
-
-                        <input type="text" name="view_id" id="view_id">
-
-                        <!-- <p id="editName"> </p> -->
+                        <input type="text" name="view_id" id="view_id">                      
                         <h4 id="editName"> <?php echo ''; ?> </h4>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>
-                        <!-- <button type="submit" name="deletedata" class="btn btn-primary"> Yes !! Delete it. </button> -->
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> Anuluj </button>                       
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
@@ -327,12 +318,10 @@
                 $('#update_id').val(data[0]);
                 $('#editName').val(data[1]);
                 $('#editSurname').val(data[2]);
-                $('#editActive').val(data[5]);
+                $('#editActive').val(data[4]);
                 
             });
         });
-    </script>
-   
+    </script>  
 </body>
-
 </html>

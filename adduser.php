@@ -1,8 +1,6 @@
-<?php
-session_start();?>
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +8,7 @@ session_start();?>
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>HMS-Dashboard</title>
+    <title>Dodaj użytkownika</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -18,6 +16,7 @@ session_start();?>
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -25,9 +24,7 @@ session_start();?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <?php 
-            include_once('sidebar.php');
-        ?>
+        <?php include_once('sidebar.php');?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -35,9 +32,7 @@ session_start();?>
             <!-- Main Content -->
             <div id="content">
 
-                <?php 
-                    include_once('topbar.php');
-                ?>
+                <?php include_once('topbar.php');?>
 
                     <!-- Begin Page Content -->
                     <div class="container-fluid">
@@ -48,8 +43,7 @@ session_start();?>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <!-- <h6 class="m-0 font-weight-bold text-primary">Dostępni użytkownicy</h6> -->
+                            <div class="card-header py-3">                               
                                 <a class='mt-2 btn btn-warning btn-sm' href='employees.php'>Powrót</a>
                             </div>
 
@@ -71,13 +65,7 @@ session_start();?>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Imię</label>
-                                        <input type="text" name="firstName" id="name" class="form-control" required>      
-                                        <?php
-                                            // if(!isset($_SESSION['error_firstName']))
-                                            // { 
-                                            //  echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_firstName'].'</div>';
-                                            // }
-                                             ?>                           
+                                        <input type="text" name="firstName" id="name" class="form-control" required>                                                                
                                     </div>
 
                                     <div class="mb-3">
@@ -87,45 +75,37 @@ session_start();?>
 
                                     <div class="mb-3">
                                     <label> Komputer </label>     
-                                            <select name="computerSelect" id="computerSelect" class='form-select' aria-label='Default select example'>
-                                                <option>Wybierz komputer z listy</option>
-                                                    <?php              
-                                                        include('connection.php');     
-                                                        $sql = "SELECT * FROM computers WHERE owner_id IS NULL";
-                                                        $wynik = mysqli_query($link, $sql);     
-                                                        while($rekord=mysqli_fetch_assoc($wynik))
-                                                        {
-                                                            echo "                                                                                        
-                                                                    <option>".$rekord['computer_name']."</option>                    
-                                                                ";
-                                                        }                                   
-                                                    ?>                                           
-                                            </select>                                     
+                                        <select class='form-select' name="computerSelect" id="computerSelect"  aria-label='Default select example'>
+                                            <option>Wybierz komputer z listy</option>
+                                                <?php              
+                                                    include('connection.php');     
+                                                    $sql = "SELECT * FROM computers WHERE owner_id IS NULL";
+                                                    $wynik = mysqli_query($link, $sql);     
+                                                    while($rekord=mysqli_fetch_assoc($wynik))
+                                                    {
+                                                        echo "                                                                                        
+                                                                <option>".$rekord['computer_name']."</option>                    
+                                                            ";
+                                                    }                                   
+                                                ?>                                           
+                                        </select>                                     
                                     </div>
                                                     
-
                                     <div class="mb-3 form-check">
                                         <input type="checkbox" name="activated" id="activated" class="form-check-input">
-                                        <label class="form-check-label" for="exampleCheck1">Czy aktywować konto?
-                                       
-                                        </label>
-                                    </div>
-                                    
+                                            <label class="form-check-label" for="exampleCheck1">Czy aktywować konto?</label>                                                                   
+                                    </div>                                   
                                     <button type="submit" name="submit" class="btn btn-primary">Dodaj</button>
-                                </form>
-      
+                                </form>     
                             </div>
                         </div>
-
                     </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
 
-            <?php 
-                include_once('footer.php');
-             ?>
+            <?php include_once('footer.php');?>
 
     </div>
     <!-- End of Content Wrapper -->
@@ -176,5 +156,4 @@ session_start();?>
     <script src="js/demo/chart-pie-demo.js"></script>
 
 </body>
-
 </html>

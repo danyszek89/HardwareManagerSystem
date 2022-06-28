@@ -31,9 +31,5 @@
 
         header("Location:computers.php");
     }      
-    
-
-}
-
-                     
+}                  
 ?>

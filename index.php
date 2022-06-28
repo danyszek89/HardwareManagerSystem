@@ -11,8 +11,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <title>Logowanie</title>
   </head>
-  <body>
-  
+<body>
    <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -21,18 +20,15 @@
                 <div class="card-body p-5 text-center">
 
                     <div class="mb-md-5 mt-md-4 pb-5">
-
                         <img src="img/iconSmall.png" alt="">
-
-                        <h2 class="fw-bold mb-2">Hardware manager system</h2>
-                        <hr>
-                        <p class="text-white-50 mb-5">Zarządzanie zasobami staje się łatwiejsze!</p>
-                        <br>
+                            <h2 class="fw-bold mb-2">Hardware manager system</h2>
+                                <hr>
+                            <p class="text-white-50 mb-5">Zarządzanie zasobami staje się łatwiejsze!</p>
+                                <br>
                                                
                         <form action="login.php" method="POST">
                             <?php
-                                session_start();
-                        
+                                session_start();                   
                                 //Errors handling
                                 if(isset($_SESSION['error_account_inactive']))
                                 {
@@ -51,28 +47,22 @@
                                    //echo '<div class="error-handling">'.$_SESSION['error_wrong_user'].'</div>';
                                    echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_wrong_user'].'</div>';                                                     
                                    unset($_SESSION['error_wrong_user']); 
-                                }    
-                                     
+                                }                                       
                             ?>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required/>
-                                <!-- <label class="form-label" for="login">Login</label> -->
+                                <input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required/>                               
                             </div>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Hasło" required/>
-                                <!-- <label class="form-label" for="password">Hasło</label> -->
+                                <input type="password" name="password" class="form-control form-control-lg" placeholder="Hasło" required/>                               
                             </div>
                     
                             <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p>
                             <button class="btn loginButton btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
                         </form>            
                     </div>
-
-                    <!-- <div>
-                        <p class="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
-                    </div> -->
+              
                     <div>
                         <p class="text-white-50 mb-0">Wersja 1.0</p>
                     </div>

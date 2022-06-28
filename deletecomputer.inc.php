@@ -3,21 +3,20 @@
     include('connection.php');
 
     if(isset($_POST['deletedata']))
-{
-    $id = $_POST['delete_id'];
-
-    $query = "DELETE FROM computers WHERE id='$id'";
-    $query_run = mysqli_query($link, $query);
-
-    if($query_run)
     {
-        echo '<script> alert("Data Deleted"); </script>';
-        header("Location:computers.php?dataDeleted");
-    }
-    else
-    {
-        echo '<script> alert("Data Not Deleted"); </script>';
-    }
-}
+        $id = $_POST['delete_id'];
 
+        $query = "DELETE FROM computers WHERE id='$id'";
+        $query_run = mysqli_query($link, $query);
+
+        if($query_run)
+        {
+            echo '<script> alert("Data Deleted"); </script>';
+            header("Location:computers.php?dataDeleted");
+        }
+        else
+        {
+            echo '<script> alert("Data Not Deleted"); </script>';
+        }
+    }   
 ?>
