@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+.gradient-custom {
+    background: -webkit-linear-gradient(bottom, #005bea, #00c6fb);
+    background: -o-linear-gradient(bottom, #005bea, #00c6fb);
+    background: -moz-linear-gradient(bottom, #005bea, #00c6fb);
+    background: linear-gradient(bottom, #005bea, #00c6fb);
+    opacity: 1.0;
+}
+
+.fontColor{
+    color: rgb(37, 36, 36);
+}
+
+.version{
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.forgotPassword{
+    text-decoration: none;
+}
+
+.error-handling {
+    color: rgba(37, 36, 36, 0.39);
+    margin-bottom: 3rem;
+}
+
+/* Login inputs size */
+.form-control-lg {  
+    font-size: 1rem !important;   
+}
+
+/* Login button size */
+.btn-lg { 
+    font-size: 1rem !important; 
+}
+
+.loginButton{
+    background: rgba(37, 117, 252, 1);
+    color: white;
+}
+
+.loginButton:hover {
+    color:#fff; background: rgb(78, 156, 245);
+}
+
+
+

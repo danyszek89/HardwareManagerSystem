@@ -69,7 +69,12 @@
                                {                                            
                                    echo' <div class="alert alert-success" role="alert">'.$_SESSION['user_was_deleted'].'</div>'; 
                                    unset($_SESSION['user_was_deleted']); 
-                               }                                                                             
+                               }    
+                               if(isset($_SESSION['dataUpdated']))
+                               {                                            
+                                   echo' <div class="alert alert-success" role="alert">'.$_SESSION['dataUpdated'].'</div>'; 
+                                   unset($_SESSION['dataUpdated']); 
+                               }                                                                           
                             ?>
                        
                             <div class="table-responsive">

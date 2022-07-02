@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/main.css" type="text/css">
     <title>Logowanie</title>
   </head>
 <body>
@@ -16,14 +16,17 @@
         <div class="container py-5 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card bg-light text-white" style="border-radius: 1rem;">
                 <div class="card-body p-5 text-center">
 
                     <div class="mb-md-5 mt-md-4 pb-5">
-                        <img src="img/iconSmall.png" alt="">
-                            <h2 class="fw-bold mb-2">Hardware manager system</h2>
-                                <hr>
-                            <p class="text-white-50 mb-5">Zarządzanie zasobami staje się łatwiejsze!</p>
+                        <img src="img/imacSmall.png" alt="">
+                            <h2 class="fontColor fw-bold mb-2 mt-3
+                            ">Hardware manager system</h2>
+                                <hr  class="fontColor mt-0">
+                            <!-- <p class="text-white-50 mb-5">Zarządzanie zasobami staje się łatwiejsze!</p> -->
+                            <p class="fontColor mb-3">Zarządzanie zasobami staje się łatwiejsze!</p>
+
                                 <br>
                                                
                         <form action="login.php" method="POST">
@@ -51,20 +54,34 @@
                             ?>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required/>                               
+                                <?php
+                                    //Pozostawia wpisany login po nieudanej rejestracji
+                                    if(!isset($_SESSION['remember_login']))
+                                    {
+                                        $_SESSION['remember_login']='';
+                                    }
+                                    echo '<input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required autocomplete="off" value="'.$_SESSION['remember_login'].'">';                                     
+                                    unset($_SESSION['remember_login']);
+                                ?>
+                                <!-- <input type="text" name="login" class="form-control form-control-lg" placeholder="Login" required/>                                -->
                             </div>
 
                             <div class="form-outline form-white mb-4">
                                 <input type="password" name="password" class="form-control form-control-lg" placeholder="Hasło" required/>                               
                             </div>
                     
-                            <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p>
+                            <p class="small mb-5 pb-lg-2"><a class="fontColor forgotPassword" href="#!">Zapomniałeś hasła?</a></p>
+                            <!-- <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Zapomniałeś hasła?</a></p> -->
+
+                            
                             <button class="btn loginButton btn-lg px-5" type="submit" name="loginSubmit">Zaloguj</button>  
                         </form>            
                     </div>
               
                     <div>
-                        <p class="text-white-50 mb-0">Wersja 1.0</p>
+                        <!-- <p class="text-white-50 mb-0">Wersja 1.0</p> -->
+                        <p class="fontColor version mb-0">Wersja 1.1</p>
+
                     </div>
 
                 </div>

@@ -1,5 +1,9 @@
 <?php 
     session_start();
+    $_SESSION['remember_firstName'] = $_POST['firstName'];
+    $_SESSION['remember_lastName'] = $_POST['lastName'];
+    //$_SESSION['remember_computerSelect'] = $_POST['computerSelect'];
+    $_SESSION['remember_activated'] = $_POST['activated'];
     include('connection.php');  
     if(isset($_POST['submit'])) 
     {
@@ -34,27 +38,54 @@
                 echo "Wybrany PC: ".$computerSelect;
             }
 
-            //Employee insert
-            $sql = "INSERT INTO employees (`id`, `name`, `surname`, `registered`, `active`) VALUES (NULL, '$firstName', '$lastName', '$date', '$check_value')";
-            $wynik = mysqli_query($link, $sql);  
-            $last_id = mysqli_insert_id($link);
-            echo "Last ID: ".$last_id;
+            $sqlik = "SELECT * FROM employees WHERE name='$firstName' AND surname='$lastName'";
+            $wynikik = mysqli_query($link, $sqlik);    
 
-            //Computer update in employees table
-            $sql_2 = "UPDATE computers SET owner_id='$last_id' WHERE id = '$computerSelect'";
-            $wynik_2 = mysqli_query($link, $sql_2);  
+            if($rekordik=mysqli_fetch_assoc($wynikik))
+            {
+                //Taki user istnieje
+                $_SESSION['error_userExists']="Ten użytkownik już istnieje";      
+                header('Location: adduser.php?error_userExists');          
+            }  
+            else {
+                //Employee insert
+                $sql = "INSERT INTO employees (`id`, `name`, `surname`, `registered`, `active`) VALUES (NULL, '$firstName', '$lastName', '$date', '$check_value')";
+                $wynik = mysqli_query($link, $sql);  
+                $last_id = mysqli_insert_id($link);
+                echo "Last ID: ".$last_id;
 
-            $_SESSION['user_was_added']="Użytkownik został dodany";           
-            header("Location:employees.php");
+                //Computer update in employees table
+                $sql_2 = "UPDATE computers SET owner_id='$last_id' WHERE id = '$computerSelect'";
+                $wynik_2 = mysqli_query($link, $sql_2);  
+
+                $_SESSION['user_was_added']="Użytkownik został dodany";           
+                header("Location:employees.php");
+            }    
+
+            
         }      
         else
         {
-            //Adding new user without computer
-            $sql = "INSERT INTO employees (`id`, `name`, `surname`, `registered`, `active`) VALUES (NULL, '$firstName', '$lastName', '$date', '$check_value')";
-            $wynik = mysqli_query($link, $sql);  
+            $sqlik = "SELECT * FROM employees WHERE name='$firstName' AND surname='$lastName'";
+            $wynikik = mysqli_query($link, $sqlik);    
 
-            $_SESSION['user_was_added']="Użytkownik został dodany";           
-            header("Location:employees.php");
+            if($rekordik=mysqli_fetch_assoc($wynikik))
+            {
+                //Taki user istnieje
+                $_SESSION['error_userExists']="Ten użytkownik już istnieje";      
+                header('Location: adduser.php?error_userExists');          
+            }    
+            else{
+                //Adding new user without computer
+                $sql = "INSERT INTO employees (`id`, `name`, `surname`, `registered`, `active`) VALUES (NULL, '$firstName', '$lastName', '$date', '$check_value')";
+                $wynik = mysqli_query($link, $sql);  
+
+                $_SESSION['user_was_added']="Użytkownik został dodany";    
+                unset($_SESSION['remember_firstName']);
+                unset($_SESSION['remember_lastName']);
+                unset($_SESSION['remember_activated']);       
+                header("Location:employees.php");
+            }    
         }
     }                
 ?>

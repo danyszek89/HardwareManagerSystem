@@ -60,23 +60,46 @@
                                         {                                          
                                             echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_lastName'].'</div>'; 
                                             unset($_SESSION['error_lastName']); 
-                                        }                                                          
+                                        }    
+                                        if(isset($_SESSION['error_userExists']))
+                                        {                                          
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_userExists'].'</div>'; 
+                                            unset($_SESSION['error_userExists']); 
+                                        }                                                            
                                     ?>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Imię</label>
-                                        <input type="text" name="firstName" id="name" class="form-control" required>                                                                
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_firstName']))
+                                            {
+                                                $_SESSION['remember_firstName']='';
+                                            }
+                                            echo '<input type="text" name="firstName" id="firstName" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_firstName'].'">';                                     
+                                            unset($_SESSION['remember_firstName']);
+                                        ?>
+                                        <!-- <input type="text" name="firstName" id="name" class="form-control" required>                                                                 -->
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Nazwisko</label>
-                                        <input type="text" name="lastName" id="surname" class="form-control" required>
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_lastName']))
+                                            {
+                                                $_SESSION['remember_lastName']='';
+                                            }
+                                            echo '<input type="text" name="lastName" id="lastName" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_lastName'].'">';                                     
+                                            unset($_SESSION['remember_lastName']);
+                                        ?>
+                                        <!-- <input type="text" name="lastName" id="surname" class="form-control" required> -->
                                     </div>
 
                                     <div class="mb-3">
                                     <label> Komputer </label>     
                                         <select class='form-select' name="computerSelect" id="computerSelect"  aria-label='Default select example'>
-                                            <option>Wybierz komputer z listy</option>
+                                            <option>Dostępne komputery</option>
                                                 <?php              
                                                     include('connection.php');     
                                                     $sql = "SELECT * FROM computers WHERE owner_id IS NULL";
@@ -92,7 +115,16 @@
                                     </div>
                                                     
                                     <div class="mb-3 form-check">
-                                        <input type="checkbox" name="activated" id="activated" class="form-check-input">
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_activated']))
+                                            {
+                                                $_SESSION['remember_activated']='';
+                                            }
+                                            echo '<input type="checkbox" name="activated" id="activated" class="form-check-input" autocomplete="off" value="'.$_SESSION['remember_activated'].'">';                                     
+                                            unset($_SESSION['remember_activated']);
+                                        ?>
+                                        <!-- <input type="checkbox" name="activated" id="activated" class="form-check-input"> -->
                                             <label class="form-check-label" for="exampleCheck1">Czy aktywować konto?</label>                                                                   
                                     </div>                                   
                                     <button type="submit" name="submit" class="btn btn-primary">Dodaj</button>

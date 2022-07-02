@@ -47,7 +47,10 @@
 
                             <div class="card-body">
                                 <form action='addcomputer.inc.php' method='POST'>
-                                    <?php                                                                 
+                                    <?php       
+
+                                        
+                                                                                                 
                                         //Errors handling                                      
                                         if(isset($_SESSION['error_name']))
                                         {                                            
@@ -63,27 +66,80 @@
                                         {                                          
                                             echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_brand'].'</div>'; 
                                             unset($_SESSION['error_brand']); 
-                                        }                                                        
+                                        }    
+                                        if(isset($_SESSION['error_model']))
+                                        {                                          
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_model'].'</div>'; 
+                                            unset($_SESSION['error_model']); 
+                                        }    
+                                        if(isset($_SESSION['error_nameExists']))
+                                        {                                          
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_nameExists'].'</div>'; 
+                                            unset($_SESSION['error_nameExists']); 
+                                        }  
+                                        if(isset($_SESSION['error_snExists']))
+                                        {                                          
+                                            echo' <div class="alert alert-danger" role="alert">'.$_SESSION['error_snExists'].'</div>'; 
+                                            unset($_SESSION['error_snExists']); 
+                                        }        
+
                                     ?>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Nazwa komputera</label>
-                                        <input type="text" name="name" id="name" class="form-control" required>                                                                    
+                                        
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_name']))
+                                            {
+                                                $_SESSION['remember_name']='';
+                                            }
+                                            echo '<input type="text" name="name" id="name" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_name'].'">';                                     
+                                            unset($_SESSION['remember_name']);
+                                       ?>
+                                        <!-- <input type="text" name="name" id="name" class="form-control" required>                                                                     -->
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Numer seryjny</label>
-                                        <input type="text" name="serialNumber" id="serialNumber" class="form-control" required>
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_serialNumber']))
+                                            {
+                                                $_SESSION['remember_serialNumber']='';
+                                            }
+                                            echo '<input type="text" name="serialNumber" id="serialNumber" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_serialNumber'].'">';                                     
+                                            unset($_SESSION['remember_serialNumber']);
+                                        ?>
+                                        <!-- <input type="text" name="serialNumber" id="serialNumber" class="form-control" required> -->
                                     </div>
                                   
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Marka</label>
-                                        <input type="text" name="brand" id="brand" class="form-control" required>
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_brand']))
+                                            {
+                                                $_SESSION['remember_brand']='';
+                                            }
+                                            echo '<input type="text" name="brand" id="brand" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_brand'].'">';                                     
+                                            unset($_SESSION['remember_brand']);
+                                       ?>
+                                        <!-- <input type="text" name="brand" id="brand" class="form-control" required> -->
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputPassword1" class="form-label">Model</label>
-                                        <input type="text" name="model" id="model" class="form-control">
+                                        <?php
+                                            //Pozostawia wpisany login po nieudanej rejestracji
+                                            if(!isset($_SESSION['remember_model']))
+                                            {
+                                                $_SESSION['remember_model']='';
+                                            }
+                                            echo '<input type="text" name="model" id="model" class="form-control" required autocomplete="off" value="'.$_SESSION['remember_model'].'">';                                     
+                                            unset($_SESSION['remember_model']);
+                                       ?>
+                                        <!-- <input type="text" name="model" id="model" class="form-control"> -->
                                     </div>                                
                                     <button type="submit" name="submit" class="btn btn-primary">Dodaj</button>
                                 </form>

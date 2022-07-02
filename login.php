@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $_SESSION['remember_login'] = $_POST['login'];
   include('connection.php');
   
   if (isset($_POST['loginSubmit']))
@@ -30,6 +31,7 @@
                 $_SESSION['type'] = $row['type'];
                 $_SESSION['active'] = $row['active'];         
                 
+                unset($_SESSION['remember_login']);
                 header('Location: dashboard.php');
             }
             else

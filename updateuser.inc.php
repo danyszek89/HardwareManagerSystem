@@ -13,7 +13,8 @@
 
         if($query_run)
         {
-            echo '<script> alert("Data Updated"); </script>';
+            
+            $_SESSION['dataUpdated']="Dane zostały zaktualizowane";
             header("Location:employees.php?dataUpdated");
         }
         else

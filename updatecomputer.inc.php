@@ -57,8 +57,8 @@
             $query_run = mysqli_query($link, $query);
 
             if($query_run)
-            {
-                echo '<script> alert("Data Updated"); </script>';
+            {              
+                $_SESSION['dataUpdated']="Dane zostały zaktualizowane";
                 header("Location:computers.php?dataUpdated");
             }
             else
