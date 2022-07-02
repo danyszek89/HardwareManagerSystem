@@ -11,8 +11,9 @@
 
         if($query_run)
         {
-            echo '<script> alert("Data Deleted"); </script>';
-            header("Location:computers.php?dataDeleted");
+            
+            $_SESSION['computer_was_deleted']="Komputer został usunięty";
+            header("Location:computers.php");
         }
         else
         {

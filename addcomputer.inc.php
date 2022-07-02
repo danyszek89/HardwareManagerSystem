@@ -29,6 +29,7 @@
         $sql = "INSERT INTO computers (`id`, `computer_name`, `serial_number`, `brand`, `model`) VALUES (NULL, '$name', '$serialNumber', '$brand', '$model')";
         $wynik = mysqli_query($link, $sql);  
 
+        $_SESSION['computer_was_added']="Komputer został dodany";
         header("Location:computers.php");
     }      
 }                  

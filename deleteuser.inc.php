@@ -11,8 +11,8 @@
 
         if($query_run)
         {
-            echo '<script> alert("Data Deleted"); </script>';
-            header("Location:employees.php?dataDeleted");
+            $_SESSION['user_was_deleted']="Użytkownik został usunięty";
+            header("Location:employees.php");
         }
         else
         {

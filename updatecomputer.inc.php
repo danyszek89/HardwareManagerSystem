@@ -34,8 +34,25 @@
                 echo '<script> alert("Data Not Updated"); </script>';
             }
         }
+
         else
         {
+            //Podzial na imie i nazwisko          
+            $podzial = explode(" ", $editUser);
+            echo 'Imie: '.$podzial[0].'<br>'; 
+            echo 'Nazwisko: '.$podzial[1].'<br>'; 
+                    
+            //Getting 'id' of user (required for foreign key)
+            $query0 = "SELECT * FROM employees WHERE name='".$podzial[0]."' AND surname='".$podzial[1]."'";
+            $wynik0 = mysqli_query($link, $query0);  
+
+            if($rekord=mysqli_fetch_assoc($wynik0))
+            {              
+                //Swap to 'id' by name and surname
+                $editUser=$rekord['id'];
+                echo "Wybrany user: ".$editUser; //id value
+            }
+
             $query = "UPDATE computers SET computer_name='$editName', owner_id='$editUser', serial_number='$editSerialNumber', brand='$editBrand', model='$editModel' WHERE id='$id'";
             $query_run = mysqli_query($link, $query);
 

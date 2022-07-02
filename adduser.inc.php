@@ -44,6 +44,7 @@
             $sql_2 = "UPDATE computers SET owner_id='$last_id' WHERE id = '$computerSelect'";
             $wynik_2 = mysqli_query($link, $sql_2);  
 
+            $_SESSION['user_was_added']="Użytkownik został dodany";           
             header("Location:employees.php");
         }      
         else
@@ -52,6 +53,7 @@
             $sql = "INSERT INTO employees (`id`, `name`, `surname`, `registered`, `active`) VALUES (NULL, '$firstName', '$lastName', '$date', '$check_value')";
             $wynik = mysqli_query($link, $sql);  
 
+            $_SESSION['user_was_added']="Użytkownik został dodany";           
             header("Location:employees.php");
         }
     }                

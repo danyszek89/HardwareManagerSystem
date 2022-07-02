@@ -13,7 +13,7 @@
 <hr class="sidebar-divider my-0">
 
 <!-- Nav Item - Dashboard -->
-<li class="nav-item active">
+<li class="nav-item">
     <a class="nav-link" href="dashboard.php">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Strona główna</span></a>
@@ -69,3 +69,26 @@
 
 </ul>
 <!-- End of Sidebar -->
+   
+    <!-- <script>
+        $('li.nav-item').click(function(){
+            alert("XD");   
+        });
+    </script> -->
+     
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        $(document).ready(function() {
+            var CurrentUrl= document.URL;
+            var CurrentUrlEnd = CurrentUrl.split('/').filter(Boolean).pop();
+            console.log(CurrentUrlEnd);
+            $( "li a" ).each(function() {
+                var ThisUrl = $(this).attr('href');
+                var ThisUrlEnd = ThisUrl.split('/').filter(Boolean).pop();
+
+                if(ThisUrlEnd == CurrentUrlEnd){
+                    $(this).closest('li').addClass('active')
+                }
+            });
+        });
+    </script>

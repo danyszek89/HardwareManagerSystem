@@ -57,6 +57,20 @@
                             
                         </div>
                         <div class="card-body">
+                            <?php                                                                 
+                                //Success message
+                                if(isset($_SESSION['user_was_added']))
+                                {                                            
+                                    echo' <div class="alert alert-success" role="alert">'.$_SESSION['user_was_added'].'</div>'; 
+                                    unset($_SESSION['user_was_added']); 
+                                }     
+                                //Success message
+                               if(isset($_SESSION['user_was_deleted']))
+                               {                                            
+                                   echo' <div class="alert alert-success" role="alert">'.$_SESSION['user_was_deleted'].'</div>'; 
+                                   unset($_SESSION['user_was_deleted']); 
+                               }                                                                             
+                            ?>
                        
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">

@@ -41,11 +41,17 @@
                     <h1 class="h3 mb-2 text-gray-800">Komputery</h1>
                     <p class="mb-4">Lisa wszystkich komputerów.</p>
 
+
+                    
+
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
+                        
                         <div class="card-header py-3">
+
                             <h6 class="m-0 font-weight-bold text-primary">Dostępne komputery</h6>
                             <?php
+                             
                                 if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator' || $_SESSION['type'] == 'moderator'))
                                 {
                                     echo "<a class='mt-2 btn btn-success btn-sm' href='addcomputer.php'>Dodaj komputer</a>";
@@ -54,12 +60,31 @@
                                 {
                                     echo "<a class='mt-2 btn btn-success btn-sm  disabled' href='#'>Dodaj komputer</a>";
                                 }
+                                                                                               
+                                                                                                       
+                            
                             ?>
                            
                             
                         </div>
                      
                         <div class="card-body">
+                            <?php
+                               //Success message
+                               if(isset($_SESSION['computer_was_added']))
+                               {                                            
+                                   echo' <div class="alert alert-success" role="alert">'.$_SESSION['computer_was_added'].'</div>'; 
+                                   unset($_SESSION['computer_was_added']); 
+                               }   
+                               
+                               //Success message
+                               if(isset($_SESSION['computer_was_deleted']))
+                               {                                            
+                                   echo' <div class="alert alert-success" role="alert">'.$_SESSION['computer_was_deleted'].'</div>'; 
+                                   unset($_SESSION['computer_was_deleted']); 
+                               }     
+                            ?>  
+                            
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -73,12 +98,16 @@
                                             <th>Akcje</th>                                            
                                         </tr>
                                     </thead>
-                                    
+                                    <!-- <td>".$rekord['owner_id']."</td> -->
                                     <tbody>
                                         <?php              
                                             include('connection.php');                               
                                             //$sql = "SELECT computers.id, computers.computer_name, employees.name, computers.serial_number, computers.brand, computers.model
                                             //FROM computers INNER JOIN employees ON employees.id = computers.owner_id";
+
+                                            
+                                            // SELECT employees.name, employees.surname
+                                            // FROM employees INNER JOIN computers ON computers.owner_id = employees.id
                                             $sql = "SELECT * FROM computers";
                                             $wynik = mysqli_query($link, $sql);     
                                             while($rekord=mysqli_fetch_assoc($wynik))
@@ -86,12 +115,24 @@
                                                 echo "
                                                     <tr>
                                                         <td>".$rekord['id']."</td>
-                                                        <td>".$rekord['computer_name']."</td>                         
-                                                        <td>".$rekord['owner_id']."</td>                         
+                                                        <td>".$rekord['computer_name']."</td>";
+
+                                                        $hehe = $rekord['owner_id'];
+                                                        $asd = "SELECT CONCAT(name,' ', surname) AS username FROM employees WHERE id=$hehe";
+                                                        $dsa = mysqli_query($link, $asd);     
+                                                        if($fff=mysqli_fetch_assoc($dsa))
+                                                        {
+                                                            echo" <td>".$fff['username']."</td>";
+                                                        }
+                                                        else
+                                                        {
+                                                            echo" <td></td>";
+                                                        }
+                                                            
+                                                echo "                         
                                                         <td>".$rekord['serial_number']."</td>
                                                         <td>".$rekord['brand']."</td>
-                                                        <td>".$rekord['model']."</td>                          
-                                                    ";   
+                                                        <td>".$rekord['model']."</td>";   
                                                         if (isset($_SESSION['type']) && ($_SESSION['type'] == 'administrator' || $_SESSION['type'] == 'moderator'))
                                                         {
                                                             echo "
@@ -109,8 +150,24 @@
                                                         }
                                                             
                                                 echo "</tr>
-                                                ";                                             
-                                            }                                   
+                                                ";     
+                                            }      
+
+                                            // $sql22 = "SELECT CONCAT(name,' ', surname) AS username FROM employees WHERE id=72";
+                                            //     $wynik = mysqli_query($link, $sql22);     
+                                            //     while($rekord=mysqli_fetch_assoc($wynik))
+                                            //     {
+                                            //         //Imie i nazwisko
+                                            //         echo" <td>".$rekord['username']."</td>";
+                                            //         $podzial = explode(" ", $rekord['username']);                   
+                                            //         $sql22 = "SELECT id FROM employees WHERE name='".$podzial[0]."'";
+                                            //         $wynik = mysqli_query($link, $sql22);     
+                                            //         if($rekord=mysqli_fetch_assoc($wynik))
+                                            //         {
+                                            //             //ID uzytkownika
+                                            //             echo" <td>".$rekord['id']."</td>";
+                                            //         }
+                                            //     }                            
                                         ?>                                   
                                     </tbody>
                                 </table>
@@ -200,12 +257,12 @@
                                 <option>Brak</option>                                                         
                                     <?php              
                                         include('connection.php');     
-                                        $sql = "SELECT * FROM employees";
+                                        $sql = "SELECT CONCAT(' ',name,' ', surname) AS uzytkownik FROM employees";
                                         $wynik = mysqli_query($link, $sql);     
                                         while($rekord=mysqli_fetch_assoc($wynik))
                                         {
                                             echo "                                                                
-                                                    <option>".$rekord['id']."</option>                                                                             
+                                                    <option>".$rekord['uzytkownik']."</option>                                                                             
                                                 ";
                                         }                                   
                                     ?>                                   
